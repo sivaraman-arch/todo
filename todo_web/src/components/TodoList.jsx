@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import TodoItem from './TodoItem';
+import TodoItem from "./TodoItem";
 // idea
 // fetch api , get list of todo , for each todo
 // render todoItem
@@ -27,13 +27,24 @@ function TodoList() {
 
   useEffect(() => {
     setTaskList(getTodoList());
-  },[]);
-  //   console.log(taskList);
+  }, []);
+  
+  const handleComplete = (id) => {
+    // console.log("go brrrr" + id);
+    //   const filterdTaskList = [... taskList]
+    let filteredList = taskList.filter((eachTask) => eachTask.id !== id);
+    console.log(filteredList);
+    setTaskList(filteredList);
 
+};
   return (
     <div>
       <p>You have {taskList.length} tasks to do today ._.</p>
-      <div>{taskList.map((eachTask) => <TodoItem task={eachTask}/>)}</div>
+      <div>
+        {taskList.map((eachTask) => (
+          <TodoItem task={eachTask} onComplete={handleComplete} />
+        ))}
+      </div>
     </div>
   );
 }
